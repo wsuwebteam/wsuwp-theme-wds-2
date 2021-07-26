@@ -1,67 +1,71 @@
   
+sudo: false
 language: php
 
-services:
-  - mysql
-
+# Cache some data across builds for performance.
 cache:
+  apt: true
   directories:
+    - node_modules
+    - vendor
     - $HOME/.composer/cache
 
-# Explicitly test against supported versions of PHP
-#
-# Reference: https://www.php.net/supported-versions.php
-php:
-  - 7.5
-  - 7.4
-  - 7.3
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+  slack:
+    on_pull_requests: true
+    on_success: change
+    on_failure: always
+    on_start: never
+    on_cancel: always
+    rooms:
+      - wsu-ucomm:n2TLZRJd84rMOMbkKthSEMgS
 
+branches:
+  only:
+    - master
+    - staging
 
-# Test against the latest version of WordPress and one version back.
-env:
-  - WP_VERSION=latest
-  - WP_VERSION=5.7
-
-# Customize the build matrix.
 matrix:
-  fast_finish: true
   include:
-    # Run PHP_CodeSniffer
-    - name: Coding standards
-      php: 7.3
-      env: WP_VERSION=latest WP_TRAVISCI=phpcs
+    - php: 7.1
+      env: WP_TRAVISCI=grunt
 
-    # Nightly versions of PHP and WordPress.
-    - name: Bleeding edge
-      php: 7.4snapshot
-      env: WP_VERSION=trunk
-
-  # Jobs that are permitted to fail without breaking the build
-  allow_failures:
-    - name: Bleeding edge
-
-before_install:
+before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-
-  # Unless we need XDebug, disable it for improved performance.
-  - phpenv config-rm xdebug.ini || return 0
-
-install:
-  # Install our Composer dependencies
-  - composer install --prefer-dist --no-interaction
-
-  # Install the WordPress core test suite
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - phpenv config-rm xdebug.ini
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      if [[ ${TRAVIS_PHP_VERSION:0:2} == "5." ]]; then
+        composer global require "phpunit/phpunit=4.8.*"
+      else
+        composer global require "phpunit/phpunit=5.7.*"
+      fi
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "grunt" ]] ; then
+      composer install
+      nvm install stable
+      npm install -g grunt-cli
+      npm install
+      npm --version
+      node --version
+    fi
+  - mysql --version
+  - phpenv versions
+  - php --version
 
 script:
   - |
-    # If we've set the $WP_TRAVISCI variable to run PHPCS, do that instead
-    # of running PHPUnit.
-    if [[ "$WP_TRAVISCI" == "phpcs" ]]; then
-      ./vendor/bin/phpcs
-    else
-      # Execute the test suite
-      ./vendor/bin/phpunit
-      # Optionally run the tests again in a multisite environment
-      #WP_MULTISITE=1 ./vendor/bin/phpunit
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      phpunit --version
+      phpunit
+      WP_MULTISITE=1 phpunit
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "grunt" ]] ; then
+      grunt
     fi
