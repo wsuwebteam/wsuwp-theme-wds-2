@@ -4,40 +4,26 @@
 class Scripts {
 
 
+	public static function init() {
 
-	public function __construct() {
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ), 5 );
 
-		// Nothing to see here
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_scripts' ) );
 
-	}
-
-
-	public function init() {
-
-		$this->setup_hooks();
-
-	}
-
-	
-	protected function setup_hooks() {
-
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 5 );
-
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
-		add_action( 'wp_enqueue_scripts', array( $this, 'remove_scripts' ), 20 );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts' ), 20 );
 
 	}
 
 
-	public function remove_scripts() {
+
+	public static function remove_scripts() {
 
 		wp_dequeue_style( 'wp-block-library' );
 
 	}
 
 
-	public function enqueue_scripts() {
+	public static function enqueue_scripts() {
 
 		$theme_version = Theme::get( 'version' );
 		$wds_version   = ( ! empty( get_theme_mod( 'wsu_wds_settings_version' ) ) ) ? get_theme_mod( 'wsu_wds_settings_version' ) : '2.x';
@@ -63,14 +49,14 @@ class Scripts {
 
 	}
 
-	public function enqueue_admin_scripts() {
+	public static function enqueue_admin_scripts() {
 
 		//wp_enqueue_style( 'wsu_design_system_wordpress_admin', 'https://cdn.web.wsu.edu/designsystem/' . self::get('wds_version') . '/build/dist/platforms/wsu-design-system.wordpress.admin.bundle.dist.css', array(), Theme::get( 'version' ) );
 
 	}
 
 	
-	public function get_script_version() {
+	public static function get_script_version() {
 
 		return ( ! empty( get_theme_mod( 'wsu_wds_settings_version' ) ) ) ? get_theme_mod( 'wsu_wds_settings_version' ) : '1.x';
 
@@ -78,4 +64,4 @@ class Scripts {
 
 }
 
-( new Scripts )->init();
+Scripts::init();

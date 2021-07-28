@@ -56,7 +56,6 @@ class Block {
 
 	}
 
-
 	protected static function is_set( $attrs, $key ) {
 
 		if ( empty( $attrs[ $key ] ) || 'default' === $attrs[ $key ] ) {
@@ -68,6 +67,20 @@ class Block {
 			return true;
 		}
 
+	}
+
+	protected static function add_modifier_classes( &$classes, $class_prefix, $attrs, $keys ) {
+
+		$classes = ( ! is_array( $classes ) ) ? array( $classes ) : $classes;
+
+		foreach ( $keys as $key ) {
+
+			if ( self::is_set( $attrs, $key ) ) {
+
+				$classes[] = $class_prefix . '--' . $attrs[ $key ];
+
+			}
+		}
 	}
 
 }

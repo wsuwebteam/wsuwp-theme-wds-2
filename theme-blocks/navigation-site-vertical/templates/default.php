@@ -11,14 +11,16 @@
 	<div class="wsu-navigation-site-vertical__panel">
 		<button class="wsu-button-ui-close wsu-navigation-site-vertical--close">Close</button>
 		<nav class="wsu-navigation-site-vertical__site-nav">
-			<?php wp_nav_menu(
+			<?php
+			wp_nav_menu(
 				array(
 					'theme_location' => 'site',
 					'menu_class'     => 'wsu-menu-toggle',
 					'container'      => '',
 					'walker'         => new Walker_Nav_Menu_Toggle(),
 				)
-			); ?>
+			);
+			?>
 		</nav>
 		<button class="wsu-button-ui-close wsu-navigation-site-vertical--close">Close</button>
 	</div>

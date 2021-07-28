@@ -5,9 +5,9 @@ class Block_Navigation_Site_Vertical extends Block {
 
 	protected static $block_name    = 'wsuwp/navigation-site-vertical';
 	protected static $default_attrs = array(
-		'show' => array(
-			'default' => true,
-			'setting' => 'wsuwp_wds_component_navigation_site_vertical_show',
+		'hide' => array(
+			'default' => false,
+			'setting' => 'wsuwp_wds_component_navigation_site_vertical_hide',
 		),
 		'style' => array(
 			'default' => 'default',
@@ -21,15 +21,23 @@ class Block_Navigation_Site_Vertical extends Block {
 
 	protected static function render( $attrs, $content = '' ) {
 
-		$wrapper_classes = self::get_wrapper_classes( $attrs );
+		if ( ! self::should_hide( $attrs ) ) {
 
-		ob_start();
+			$wrapper_classes = self::get_wrapper_classes( $attrs );
 
-		include __DIR__ . '/templates/default.php';
+			ob_start();
 
-		$block_html = ob_get_clean();
+			include __DIR__ . '/templates/default.php';
 
-		return $block_html;
+			$block_html = ob_get_clean();
+
+			return $block_html;
+
+		} else {
+
+			return '';
+
+		}
 
 	}
 
@@ -75,12 +83,25 @@ class Block_Navigation_Site_Vertical extends Block {
 		);
 
 		$wp_customize->add_setting(
-			'wsuwp_wds_component_navigation_site_vertical_showMenu',
+			'wsuwp_wds_component_navigation_site_vertical_hide',
 			array(
 				'capability' => 'edit_theme_options',
 				'default'    => false,
 			)
 		);
+
+
+		$wp_customize->add_control(
+			'wsuwp_wds_component_navigation_site_vertical_hide_control',
+			array(
+				'settings'    => 'wsuwp_wds_component_navigation_site_vertical_hide',
+				'type'        => 'checkbox',
+				'section'     => $section_id,
+				'label'       => __( 'Hide Vertical Navigation' ),
+				'description' => __( 'Do not show vertical navigation' ),
+			)
+		);
+
 
 		$wp_customize->add_control(
 			'wsuwp_wds_component_navigation_site_vertical_style_control',
@@ -97,5 +118,22 @@ class Block_Navigation_Site_Vertical extends Block {
 			)
 		);
 
+	}
+
+
+	protected static function should_hide( $attrs ) {
+
+		if ( is_front_page() && ! empty( $atts['hideOnHome'] ) ) {
+
+			return true;
+
+		} else if ( ! empty( $attrs['hide'] ) ) {
+
+			return true;
+
+		}
+
+		return false;
+		
 	}
 }

@@ -14,7 +14,6 @@ class Template {
 
 		echo do_blocks( $html );
 
-
 	}
 
 }

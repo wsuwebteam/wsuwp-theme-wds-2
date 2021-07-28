@@ -3,20 +3,14 @@
 
 class Customizer {
 
-	public function __construct() {
 
-		// Nothing to see here
+	public static function init() {
 
-	}
-
-
-	public function init() {
-
-		add_action( 'customize_register', array( $this, 'setup_customizer' ) );
+		add_action( 'customize_register', array( __CLASS__, 'setup_customizer' ) );
 
 	}
 
-	public function setup_customizer( $wp_customize ) {
+	public static function setup_customizer( $wp_customize ) {
 
 		$panel = 'wds_panel';
 
@@ -30,6 +24,7 @@ class Customizer {
 		);
 
 		Block_Header_Global::customizer( $wp_customize, $panel );
+		Block_Header_Site::customizer( $wp_customize, $panel );
 		Block_Footer_Global::customizer( $wp_customize, $panel );
 		Block_Navigation_Site_Vertical::customizer( $wp_customize, $panel );
 
@@ -38,4 +33,4 @@ class Customizer {
 
 }
 
-(new Customizer)->init();
+Customizer::init();
