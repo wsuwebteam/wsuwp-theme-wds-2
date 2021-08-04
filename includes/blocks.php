@@ -27,6 +27,7 @@ class Blocks {
 		require_once $block_dir . 'header-global/block-header-global.php';
 		require_once $block_dir . 'header-site/block-header-site.php';
 		require_once $block_dir . 'navigation-site-vertical/block-navigation-site-vertical.php';
+		require_once $block_dir . 'title-page/block-title-page.php';
 
 		add_action('init', array( __CLASS__, 'register_blocks' ) );
 
@@ -66,6 +67,7 @@ class Blocks {
 			'wsuwp/footer-article'           => 'Block_Footer_Article',
 			'wsuwp/footer-global'            => 'Block_Footer_Global',
 			'wsuwp/navigation-site-vertical' => 'Block_Navigation_Site_Vertical',
+			'wsuwp/title-page'               => 'Block_Title_Page',
 		);
 
 		foreach ( $blocks as $block => $class ) {
