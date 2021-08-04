@@ -10,7 +10,7 @@
 		<!-- SITE CONTAINER:START -->
 		<?php Template::render( 'template-parts/header-site', get_post_type() ); ?>
 		<main class="wsu-wrapper-content">	
-			<?php Template::render( 'template-parts/content', get_post_type() ); ?>
+			<?php Template::render( 'template-parts/content-archive', get_post_type() ); ?>
         </main>
 		<!-- SITE CONTAINER:END -->
 	</div>
