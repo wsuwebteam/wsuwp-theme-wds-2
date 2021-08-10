@@ -10,7 +10,7 @@ class Scripts {
 
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_scripts' ) );
 
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts' ), 20 );
+		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_scripts' ), 20 );
 
 	}
 
