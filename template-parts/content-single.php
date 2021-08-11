@@ -1,6 +1,6 @@
 <?php namespace WSUWP\Theme\WDS; ?>
 
-<!-- wp:wsuwp/post-layout -->
+<!-- wp:wsuwp/post-layout {"format":"sidebar","context":"single"} -->
 <?php 
 if ( have_posts() ) {
 	while ( have_posts() ) {

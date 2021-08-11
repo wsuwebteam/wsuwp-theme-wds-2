@@ -9,7 +9,7 @@
 	<div class="wsu-wrapper-site">
 		<!-- SITE CONTAINER:START -->
 		<?php Template::render( 'template-parts/header-site', get_post_type() ); ?>
-		<?php Template::render( 'template-parts/content', get_post_type() ); ?>
+		<?php Template::render( 'template-parts/content-front-page', get_post_type() ); ?>
 		<!-- SITE CONTAINER:END -->
 	</div>
 	<!-- SITE WRAPPER:END -->

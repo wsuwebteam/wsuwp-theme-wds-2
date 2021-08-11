@@ -36,6 +36,8 @@ class Customizer {
 
 	public static function setup_block_customizer( $wp_customize ) {
 
+		$blocks = Blocks::get('register_blocks');
+
 		$panel = 'wds_panel';
 
 		$wp_customize->add_panel(
@@ -47,10 +49,13 @@ class Customizer {
 			)
 		);
 
-		Block_Header_Global::customizer( $wp_customize, $panel );
-		Block_Header_Site::customizer( $wp_customize, $panel );
-		Block_Footer_Global::customizer( $wp_customize, $panel );
-		Block_Navigation_Site_Vertical::customizer( $wp_customize, $panel );
+		foreach ( $blocks as $block => $class ) {
+
+			$block_class = __NAMESPACE__ . '\\' . $class;
+
+			call_user_func( array( $block_class, 'customizer' ), $wp_customize, $panel );
+
+		}
 
 	}
 
