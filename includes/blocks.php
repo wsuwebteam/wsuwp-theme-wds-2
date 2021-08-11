@@ -1,7 +1,98 @@
 <?php namespace WSUWP\Theme\WDS;
 
-
 class Blocks {
+
+
+	protected static $register_blocks = array(
+		'wsuwp/header-global'            => 'Block_WSUWP_Header_Global',
+		'wsuwp/header-site'              => 'Block_WSUWP_Header_Site',
+		'wsuwp/navigation-site-vertical' => 'Block_WSUWP_Navigation_Site_Vertical',
+		'wsuwp/footer-global'            => 'Block_WSUWP_Footer_Global',
+		'wsuwp/post-layout'              => 'Block_WSUWP_Post_Layout',
+		'wsuwp/post-query'               => 'Block_WSUWP_Post_Query',
+		'wsuwp/post-article'             => 'Block_WSUWP_Post_Article',
+		'wsuwp/post-article-copy'        => 'Block_WSUWP_Post_Article_Copy',
+		'wsuwp/post-content'             => 'Block_WSUWP_Post_Content',
+		'wsuwp/post-header'              => 'Block_WSUWP_Post_Header',
+		'wsuwp/post-title'               => 'Block_WSUWP_Post_Title',
+		'wsuwp/post-byline'              => 'Block_WSUWP_Post_Byline',
+		'wsuwp/post-date'                => 'Block_WSUWP_Post_Date',
+		'wsuwp/post-footer'              => 'Block_WSUWP_Post_Footer',
+		'wsuwp/post-tags'                => 'Block_WSUWP_Post_Tags',
+		'wsuwp/post-categories'          => 'Block_WSUWP_Post_Categories',
+		'wsuwp/post-hero'                => 'Block_WSUWP_Post_Hero',
+		'wsuwp/post-social'              => 'Block_WSUWP_Post_Social',
+	);
+
+	
+	public static function get( $property ) {
+
+		switch ( $property ) {
+
+			case 'register_blocks':
+				return self::$register_blocks;
+
+			default:
+				return '';
+		}
+
+	}
+
+
+	public static function setup_classes() {
+
+		Theme::load_class( 'block' );
+
+	}
+
+
+	public static function init() {
+
+		self::setup_classes();
+
+		add_action( 'init', array( __CLASS__, 'register' ) );
+
+	}
+
+
+	public static function register() {
+
+		// Get blocks to register
+		$blocks = self::$register_blocks;
+
+		// Get the block directory
+		$block_dir = get_template_directory() . '/blocks/';
+
+		foreach ( $blocks as $block => $class ) {
+
+			// folder name should be the block name with the / replaced with - (i.e. wsuwp/name -> wsupw-name)
+			$block_folder = str_replace( '/', '-', $block );
+
+			$block_class = __NAMESPACE__ . '\\' . $class;
+
+			require_once $block_dir . $block_folder . '/block.php';
+
+			// Call get('register_block') to check if the block should be registered, default is true in class-block.php 
+			if ( call_user_func( array( $block_class, 'get' ), 'register_block' ) ) {
+
+				register_block_type(
+					$block,
+					array(
+						'api_version'     => 2,
+						'render_callback' => array( $block_class, 'render_block' ),
+						'editor_script'   => 'wsuwp-theme-wds-2-blocks',
+					)
+				);
+			}
+		}
+	}
+
+}
+
+Blocks::init();
+
+
+/*class Blocks {
 
 
 	public static function init() {
@@ -87,4 +178,4 @@ class Blocks {
 
 }
 
-Blocks::init();
+Blocks::init();*/

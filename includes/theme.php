@@ -19,14 +19,9 @@ class Theme {
 	}
 
 
-	public function __construct() {
+	public static function init() {
 
-        // Nothing to see here
-
-	}
-
-
-	public function init() {
+		self::load_class( 'query' );
 
 		//require_once __DIR__ . '/include-options.php';
 		//require_once __DIR__ . '/include-theme-config.php';
@@ -47,7 +42,7 @@ class Theme {
 	}
 
 
-	public static function require_class( $class_slug ) {
+	public static function load_class( $class_slug ) {
 
 		require_once get_template_directory() . '/classes/class-' . $class_slug . '.php';
 
@@ -55,4 +50,4 @@ class Theme {
 
 }
 
-(new Theme)->init();
+Theme::init();
