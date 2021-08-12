@@ -22,6 +22,9 @@ class Blocks {
 		'wsuwp/post-categories'          => 'Block_WSUWP_Post_Categories',
 		'wsuwp/post-hero'                => 'Block_WSUWP_Post_Hero',
 		'wsuwp/post-social'              => 'Block_WSUWP_Post_Social',
+		'wsuwp/post-image'               => 'Block_WSUWP_Post_Image',
+		'wsuwp/post-excerpt'             => 'Block_WSUWP_Post_Excerpt',
+		'wsuwp/pagination'               => 'Block_WSUWP_Pagination',
 	);
 
 	

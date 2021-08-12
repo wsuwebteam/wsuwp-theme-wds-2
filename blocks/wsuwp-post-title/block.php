@@ -6,6 +6,8 @@ class Block_WSUWP_Post_Title extends Block {
 	protected static $default_attrs = array(
 		'className' => '',
 		'type'      => 'default',
+		'tag'       => 'h1',
+		'linkTitle' => false,
 	);
 
 

@@ -1,14 +1,14 @@
 <?php namespace WSUWP\Theme\WDS; ?>
 
-<!-- wp:wsuwp/post-layout {"format":"sidebar","context":"single"} -->
+<main class="wsu-wrapper-content">	
 <?php 
 if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post();
 
-		Template::render( 'template-parts/article', get_post_type() );
+		Template::render( 'block-templates/article', get_post_type() );
 
 	} // end while
 } 
 ;?>
-<!-- /wp:wsuwp/post-layout -->
+</main>
