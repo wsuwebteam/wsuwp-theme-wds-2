@@ -1,6 +1,7 @@
 <div class="wsu-wrapper-content">
 	<div class="wsu-layout wsu-layout--sidebar">
 		<main class="wsu-layout-panel">
+			<h1><?php the_archive_title(''); ?></h1>
 		<?php 
 		if ( have_posts() ) {
 			while ( have_posts() ) {
