@@ -4,15 +4,22 @@ class Block_WSUWP_Post_Byline extends Block {
 
 	protected static $block_name    = 'wsuwp/post-byline';
 	protected static $default_attrs = array(
-		'className' => '',
-        'hide'      => false,
-		'style'     => 'default',
+		'className'   => '',
+        'hide'        => false,
+		'style'       => 'default',
+		'authorName'  => '',
+		'authorTitle' => '',
+		'authorLink'  => '',
+		'authorId'    => '',
+		'authors'     => array(),
 	);
 
 
 	public static function render( $attrs, $content = '' ) {
 
 		if ( ! static::is_set( $attrs, 'hide' ) ) {
+
+			self::parse_attrs( $attrs );
 
 			$wrapper_classes = 'wsu-meta-byline';
 
@@ -21,7 +28,15 @@ class Block_WSUWP_Post_Byline extends Block {
 
 			ob_start();
 
-			include __DIR__ . '/templates/default.php';
+			foreach ( $attrs['authors'] as $author ) {
+
+				$author_name  = ( ! empty( $author['name'] ) ) ? $author['name'] : '';
+				$author_title = ( ! empty( $author['title'] ) ) ? $author['title'] : '';
+				$author_link  = ( ! empty( $author['link'] ) ) ? $author['link'] : '';
+
+				include __DIR__ . '/templates/default.php';
+
+			} 
 
 			return ob_get_clean();
 
@@ -34,68 +49,31 @@ class Block_WSUWP_Post_Byline extends Block {
 	}
 
 
-    public static function customizer( $wp_customize, $panel ) {
+	public static function parse_attrs( &$attrs ) {
 
-        $customizer_prefix = static::get_customizer_prefix();
+		if ( empty( $attrs['authorName'] ) ) {
 
-		$section_id = "{$customizer_prefix}_section";
+			if ( in_the_loop() ) {
 
-		$wp_customize->add_section(
-			$section_id,
-			array(
-				'title'       => __( 'Header Site' ),
-				'description' => __( 'Edit Global Header Settings' ),
-				'panel'       => $panel,
-				'priority'    => 160,
-				'capability'  => 'edit_theme_options',
-			)
-		);
+				$attrs['authors'] = array(
+					array(
+						'name'       => get_the_author(),
+						'authorLink' => get_the_author_posts_link(),
+					),
+				);
 
-		$wp_customize->add_setting(
-			"{$customizer_prefix}_style",
-			array(
-				'capability' => 'edit_theme_options',
-				'default'    => 'default',
-			)
-		);
+			} elseif ( ! empty( $attrs['authorId'] ) ) {
 
-		$wp_customize->add_setting(
-			"{$customizer_prefix}_format",
-			array(
-				'capability' => 'edit_theme_options',
-				'default'    => 'default',
-			)
-		);
+				$attrs['authors'] = array(
+					array(
+						'name'       => get_the_author_meta( 'display_name', $attrs['authorId'] ),
+						'authorLink' => get_the_author_meta( 'display_name', $attrs['authorId'] ),
+					),
+				);
+			}
+		}
 
-
-		$wp_customize->add_control(
-			"{$customizer_prefix}_style_control",
-			array(
-				'settings'    => "{$customizer_prefix}_style",
-				'type'        => 'select',
-				'section'     => $section_id,
-				'label'       => __( 'Style' ),
-				'description' => __( 'Change global header style.' ),
-				'choices'     => array(
-					'default' => 'Default',
-				),
-			)
-		);
-
-		$wp_customize->add_control(
-			"{$customizer_prefix}_format_control",
-			array(
-				'settings'    => "{$customizer_prefix}_format",
-				'type'        => 'select',
-				'section'     => $section_id,
-				'label'       => __( 'Format' ),
-				'description' => __( 'Change global header style.' ),
-				'choices'     => array(
-					'default' => 'Default',
-					'sidebar' => 'Sidebar',
-				),
-			)
-		);
+		$attrs = apply_filters( 'wsu_wds_component_post_byline', $attrs );
 
 	}
 
