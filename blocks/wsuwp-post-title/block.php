@@ -13,6 +13,10 @@ class Block_WSUWP_Post_Title extends Block {
 
 	public static function render( $attrs, $content = '' ) {
 
+		$wrapper_classes = '';
+
+		static::add_class( $wrapper_classes, '', 'className', $attrs );
+
 		ob_start();
 
 		include __DIR__ . '/templates/default.php';

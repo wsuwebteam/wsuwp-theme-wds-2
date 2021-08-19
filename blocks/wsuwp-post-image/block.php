@@ -11,7 +11,7 @@ class Block_WSUWP_Post_Image extends Block {
 		'imageSrc'     => '',
 		'imageAlt'     => '',
 		'imageCaption' => '',
-		'imageRatio'   => '16-9',
+		'imageRatio'   => '',
 	);
 
 
@@ -24,7 +24,7 @@ class Block_WSUWP_Post_Image extends Block {
 			$wrapper_classes = 'wsu-image-frame';
 
 			static::add_class( $wrapper_classes, '', 'className', $attrs );
-			static::add_class( $wrapper_classes, 'wsu-ratio--', 'imageRatio', $attrs );
+			static::add_class( $wrapper_classes, 'wsu-image--ratio-', 'imageRatio', $attrs );
 
 			ob_start();
 
