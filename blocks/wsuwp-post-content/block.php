@@ -5,6 +5,7 @@ class Block_WSUWP_Post_Content extends Block {
 	protected static $block_name    = 'wsuwp/post-content';
 	protected static $default_attrs = array(
 		'className' => '',
+		'ignoreMore' => '',
 	);
 
 
@@ -12,7 +13,21 @@ class Block_WSUWP_Post_Content extends Block {
 
 		ob_start();
 
-		the_content();
+		if ( ! empty( $attrs['ignoreMore'] ) ) {
+
+			global $post;
+
+			$content = $post->post_content;
+
+			$content = str_replace( '<!--more-->', '', $content );
+
+			echo apply_filters( 'the_content', $content );
+
+		} else {
+
+			the_content();
+
+		}
 
 		return ob_get_clean();
 

@@ -4,9 +4,10 @@ class Block_WSUWP_Post_Excerpt extends Block {
 
 	protected static $block_name    = 'wsuwp/post-excerpt';
 	protected static $default_attrs = array(
-		'className' => '',
-		'type'      => 'default',
-		'style'     => '',
+		'className'   => '',
+		'type'        => 'default',
+		'style'       => '',
+		'hideCaption' => false,
 	);
 
 
@@ -19,7 +20,11 @@ class Block_WSUWP_Post_Excerpt extends Block {
 
 		ob_start();
 
-		include __DIR__ . '/templates/default.php';
+		if ( ! $attrs['hideCaption'] ) {
+
+			include __DIR__ . '/templates/default.php';
+
+		}
 
 		return ob_get_clean();
 

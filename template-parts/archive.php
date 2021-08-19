@@ -7,7 +7,7 @@
 			while ( have_posts() ) {
 				the_post();
 
-					WSUWP\Theme\WDS\Template::render( 'block-templates/article-list', get_post_type() );
+					WSUWP\Theme\WDS\Template::render( 'block-templates/article-card-horizontal-reversed', get_post_type() );
 
 				} // end while
 
