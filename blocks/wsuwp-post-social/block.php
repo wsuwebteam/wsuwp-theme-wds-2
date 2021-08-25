@@ -7,12 +7,17 @@ class Block_WSUWP_Post_Social extends Block {
 		'className' => '',
         'hide'      => false,
 		'style'     => 'default',
+		'bodyText'  => '',
+		'title'     => '',
+		'link'      => '',
 	);
 
 
 	public static function render( $attrs, $content = '' ) {
 
 		if ( ! static::is_set( $attrs, 'hide' ) ) {
+
+			self::set_attrs( $attrs );
 
 			$wrapper_classes = 'wsu-social-icons';
 
@@ -30,6 +35,22 @@ class Block_WSUWP_Post_Social extends Block {
 			return '';
 		}
 
+	}
+
+
+	public static function set_attrs( &$attrs ) {
+
+		if ( in_the_loop() ) {
+
+			//$attrs['link'] = ( empty( $attrs['link'] ) ) ? urlencode( get_permalink() ) : $attrs['link'];
+
+			//$attrs['title'] = ( empty( $attrs['link'] ) ) ? urlencode( get_the_title() ) : $attrs['title'];
+
+			$attrs['link'] = ( empty( $attrs['link'] ) ) ? get_permalink() : $attrs['link'];
+
+			$attrs['title'] = ( empty( $attrs['title'] ) ) ? get_the_title() : $attrs['title'];
+
+		}
 
 	}
 
