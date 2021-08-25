@@ -14,10 +14,10 @@ class Block_WSUWP_Navigation_Site_Vertical extends Block {
 
 		if ( ! static::is_set( $attrs, 'hide' ) ) {
 
-			$wrapper_classes = 'wsu-navigation-site-vertical';
+			$wrapper_classes = 'wsu-navigation-site';
 
 			static::add_class( $wrapper_classes, '', 'className', $attrs );
-			static::add_class( $wrapper_classes, 'wsu-navigation-site-vertical--', 'style', $attrs );
+			static::add_class( $wrapper_classes, 'wsu-navigation-site--', 'style', $attrs );
 
 			ob_start();
 
