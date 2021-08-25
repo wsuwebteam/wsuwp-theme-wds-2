@@ -75,6 +75,13 @@ class Blocks {
 
 			require_once $block_dir . $block_folder . '/block.php';
 
+			// A block should declare an init method if it needs to add filters, hooks, scripts, or other WP assets.
+			if ( method_exists( $block_class, 'init' ) ) {
+
+				call_user_func( array( $block_class, 'init' ) );
+
+			}
+
 			// Call get('register_block') to check if the block should be registered, default is true in class-block.php 
 			if ( call_user_func( array( $block_class, 'get' ), 'register_block' ) ) {
 

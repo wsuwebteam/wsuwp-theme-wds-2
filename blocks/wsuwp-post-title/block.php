@@ -8,6 +8,7 @@ class Block_WSUWP_Post_Title extends Block {
 		'type'      => 'default',
 		'tag'       => 'h1',
 		'linkTitle' => false,
+		'tab'       => false,
 	);
 
 
