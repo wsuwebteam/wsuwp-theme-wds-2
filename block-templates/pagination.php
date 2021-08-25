@@ -1,1 +1,1 @@
-<!-- wp:wsuwp/pagination /-->
+<!-- wp:wsuwp/pagination {"type":"week"} /-->
