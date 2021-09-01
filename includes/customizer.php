@@ -6,6 +6,9 @@ class Customizer {
 
 	public static function init() {
 
+		require_once get_template_directory() . '/customizer/customizer_social.php';
+		require_once get_template_directory() . '/customizer/customizer_contact.php';
+
 		add_action( 'customize_register', array( __CLASS__, 'setup_customizer' ) );
 
 	}
@@ -20,6 +23,9 @@ class Customizer {
 
 
 	public static function setup_theme_customizer( $wp_customize ) {
+
+		$social = new Customizer_Social( $wp_customize );
+		$contact = new Customizer_Contact( $wp_customize );
 
 		$panel = 'wds_theme_panel';
 

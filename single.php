@@ -10,6 +10,7 @@
 		<!-- SITE CONTAINER:START -->
 		<?php Template::render( 'block-templates/header-site', get_post_type() ); ?>
 		<?php Template::render( 'template-parts/single', get_post_type() ); ?>
+		<?php get_template_part( 'template-parts/footer-site.php', get_post_type() ); ?>
 		<!-- SITE CONTAINER:END -->
 	</div>
 	<!-- SITE WRAPPER:END -->

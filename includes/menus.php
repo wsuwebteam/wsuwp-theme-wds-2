@@ -16,9 +16,31 @@ class Menus {
 		register_nav_menus(
 			array(
 				'site'    => 'Site Navigation',
-				'offsite' => 'Offsite Navigation (Footer)',
+				'footer'  => 'Footer Menu',
 			)
 		);
+
+	}
+
+	public static function get( $format = false ) {
+
+		$nav_menus = wp_get_nav_menus();
+
+		if ( 'select' === $format ) {
+
+			$select = array();
+
+			foreach ( $nav_menus as $nav_menu ) {
+
+				$select[ $nav_menu->slug ] = $nav_menu->name;
+
+			}
+
+			$nav_menus = $select;
+
+		}
+
+		return $nav_menus;
 
 	}
 

@@ -10,6 +10,11 @@ class Block_WSUWP_Post_Social extends Block {
 		'bodyText'  => '',
 		'title'     => '',
 		'link'      => '',
+		'twitter'   => '',
+		'facebook'  => '',
+		'linkedin'  => '',
+		'instagram' => '',
+		'setFrom'   => 'post',
 	);
 
 
@@ -40,84 +45,37 @@ class Block_WSUWP_Post_Social extends Block {
 
 	public static function set_attrs( &$attrs ) {
 
-		if ( in_the_loop() ) {
+		if ( 'post' === $attrs['setFrom'] ) {
 
-			//$attrs['link'] = ( empty( $attrs['link'] ) ) ? urlencode( get_permalink() ) : $attrs['link'];
+			if ( in_the_loop() ) {
 
-			//$attrs['title'] = ( empty( $attrs['link'] ) ) ? urlencode( get_the_title() ) : $attrs['title'];
+				//$attrs['link'] = ( empty( $attrs['link'] ) ) ? urlencode( get_permalink() ) : $attrs['link'];
+	
+				//$attrs['title'] = ( empty( $attrs['link'] ) ) ? urlencode( get_the_title() ) : $attrs['title'];
+	
+				$attrs['link'] = ( empty( $attrs['link'] ) ) ? get_permalink() : $attrs['link'];
+	
+				$attrs['title'] = ( empty( $attrs['title'] ) ) ? get_the_title() : $attrs['title'];
 
-			$attrs['link'] = ( empty( $attrs['link'] ) ) ? get_permalink() : $attrs['link'];
+				$attrs['twitter']   = $attrs['link'];
+				$attrs['facebook']  = $attrs['link'];
+				$attrs['linkedin']  = $attrs['link'];
+				$attrs['instagram'] = $attrs['link'];
+				$attrs['email']     = $attrs['link'];
+	
+			}
 
-			$attrs['title'] = ( empty( $attrs['title'] ) ) ? get_the_title() : $attrs['title'];
+		} elseif ( 'options' === $attrs['setFrom'] ) {
+
+			$attrs['twitter']   = WDS_Options::get( 'social', 'twitter' );
+			$attrs['facebook']  = WDS_Options::get( 'social', 'facebook' );
+			$attrs['linkedin']  = WDS_Options::get( 'social', 'linkedin' );
+			$attrs['instagram'] = WDS_Options::get( 'social', 'instagram' );
+			$attrs['email']     = WDS_Options::get( 'social', 'email', get_bloginfo( 'url' ) );
 
 		}
 
 	}
 
-
-    public static function customizer( $wp_customize, $panel ) {
-
-        $customizer_prefix = static::get_customizer_prefix();
-
-		$section_id = "{$customizer_prefix}_section";
-
-		$wp_customize->add_section(
-			$section_id,
-			array(
-				'title'       => __( 'Header Site' ),
-				'description' => __( 'Edit Global Header Settings' ),
-				'panel'       => $panel,
-				'priority'    => 160,
-				'capability'  => 'edit_theme_options',
-			)
-		);
-
-		$wp_customize->add_setting(
-			"{$customizer_prefix}_style",
-			array(
-				'capability' => 'edit_theme_options',
-				'default'    => 'default',
-			)
-		);
-
-		$wp_customize->add_setting(
-			"{$customizer_prefix}_format",
-			array(
-				'capability' => 'edit_theme_options',
-				'default'    => 'default',
-			)
-		);
-
-
-		$wp_customize->add_control(
-			"{$customizer_prefix}_style_control",
-			array(
-				'settings'    => "{$customizer_prefix}_style",
-				'type'        => 'select',
-				'section'     => $section_id,
-				'label'       => __( 'Style' ),
-				'description' => __( 'Change global header style.' ),
-				'choices'     => array(
-					'default' => 'Default',
-				),
-			)
-		);
-
-		$wp_customize->add_control(
-			"{$customizer_prefix}_format_control",
-			array(
-				'settings'    => "{$customizer_prefix}_format",
-				'type'        => 'select',
-				'section'     => $section_id,
-				'label'       => __( 'Format' ),
-				'description' => __( 'Change global header style.' ),
-				'choices'     => array(
-					'default' => 'Default',
-					'sidebar' => 'Sidebar',
-				),
-			)
-		);
-
-	}
 
 }

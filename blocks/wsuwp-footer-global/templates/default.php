@@ -3,7 +3,7 @@
 		© Washington State University 2021
 	</div>
 	<nav class="wsu-footer-global__navigation">
-		<ul class="wsu-menu-utility-horizontal">
+		<ul class="wsu-menu-tertiary">
 			<li>
 				<a href="https://access.wsu.edu/">Access</a>
 			</li>

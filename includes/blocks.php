@@ -8,6 +8,7 @@ class Blocks {
 		'wsuwp/header-site'              => 'Block_WSUWP_Header_Site',
 		'wsuwp/navigation-site-vertical' => 'Block_WSUWP_Navigation_Site_Vertical',
 		'wsuwp/footer-global'            => 'Block_WSUWP_Footer_Global',
+		'wsuwp/footer-site'              => 'Block_WSUWP_Footer_Site',
 		'wsuwp/post-layout'              => 'Block_WSUWP_Post_Layout',
 		'wsuwp/post-query'               => 'Block_WSUWP_Post_Query',
 		'wsuwp/post-article'             => 'Block_WSUWP_Post_Article',
