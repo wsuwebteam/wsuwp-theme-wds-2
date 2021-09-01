@@ -9,7 +9,7 @@
 		<?php
 			wp_nav_menu(
 				array(
-					'theme_location' => 'site',
+					'theme_location' => 'footer',
 					'menu_class'     => 'wsu-menu-utility wsu-menu-utility--horizontal wsu-menu-utility--flat',
 					'container'      => '',
 					'walker'         => new WSUWP\Theme\WDS\Walker_Nav_Menu_Toggle(),
