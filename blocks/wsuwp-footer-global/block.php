@@ -44,7 +44,7 @@ class Block_WSUWP_Footer_Global extends Block {
 			$section_id,
 			array(
 				'title'       => __( 'Footer Global' ),
-				'description' => __( 'Edit Global Header Settings' ),
+				'description' => __( 'Edit Global Footer Settings' ),
 				'panel'       => $panel,
 				'priority'    => 160,
 				'capability'  => 'edit_theme_options',
@@ -59,15 +59,6 @@ class Block_WSUWP_Footer_Global extends Block {
 			)
 		);
 
-		$wp_customize->add_setting(
-			"{$customizer_prefix}_hide",
-			array(
-				'capability' => 'edit_theme_options',
-				'default'    => 'default',
-			)
-		);
-
-
 		$wp_customize->add_control(
 			"{$customizer_prefix}_style_control",
 			array(
@@ -75,22 +66,11 @@ class Block_WSUWP_Footer_Global extends Block {
 				'type'        => 'select',
 				'section'     => $section_id,
 				'label'       => __( 'Style' ),
-				'description' => __( 'Change global header style.' ),
+				'description' => __( 'Change global footer style.' ),
 				'choices'     => array(
 					'default' => 'Default',
 					'light'   => 'Light',
 				),
-			)
-		);
-
-		$wp_customize->add_control(
-			"{$customizer_prefix}_hide_control",
-			array(
-				'settings'    => "{$customizer_prefix}_hide",
-				'type'        => 'checkbox',
-				'section'     => $section_id,
-				'label'       => __( 'Hide' ),
-				'description' => __( 'Hide menu icon on mobile' ),
 			)
 		);
 

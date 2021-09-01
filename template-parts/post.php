@@ -6,6 +6,8 @@
 			while ( have_posts() ) {
 				the_post();
 
+				WSUWP\Theme\WDS\Query::add_exclude_post( get_the_ID() );
+
 				WSUWP\Theme\WDS\Template::render( 'block-templates/article', get_post_type() );
 
 			} // end while
