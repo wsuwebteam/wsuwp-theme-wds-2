@@ -6,5 +6,5 @@
         <!-- wp:wsuwp/post-byline /-->
         <!-- wp:wsuwp/post-tags /-->
     </div>
-    <!-- wp:wsuwp/post-image {"className":"wsu-image-frame--fixed-ratio"} /-->
+    <!-- wp:wsuwp/post-image {"className":"wsu-image-frame--fixed-ratio","link":"<?php echo esc_html( $args['link'] ?: 'false' ); ?>"} /-->
 <!-- /wp:wsuwp/post-article -->
