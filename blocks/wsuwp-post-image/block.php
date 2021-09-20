@@ -7,6 +7,7 @@ class Block_WSUWP_Post_Image extends Block {
 		'className'    => '',
         'hide'         => false,
 		'style'        => 'default',
+		'link'         => false,
 		'imageId'      => '',
 		'imageSrc'     => '',
 		'imageAlt'     => '',
@@ -20,6 +21,12 @@ class Block_WSUWP_Post_Image extends Block {
 		if ( ! static::is_set( $attrs, 'hide' ) ) { 
 
 			self::set_image_attrs( $attrs );
+
+			if ( $attrs['link'] ) {
+
+				$attrs['link'] = get_post_permalink();
+
+			}
 
 			$wrapper_classes = 'wsu-image-frame';
 
