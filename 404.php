@@ -3,12 +3,12 @@
 <!-- GLOBAL CONTAINER:START -->
 <div class="wsu-wrapper-global">
 	<?php get_template_part( 'template-global/global-header', get_post_type() ); ?>
-	<?php get_template_part( 'template-component/component-site-navigation-vertical', get_post_type() ); ?>
+	<?php get_template_part( 'template-site/site-navigation-vertical', get_post_type() ); ?>
 	<!-- SITE WRAPPER:START -->
 	<div class="wsu-wrapper-site">
 		<!-- SITE CONTAINER:START -->
-		<?php get_template_part( 'template-site/site-header', get_post_type() ); ?>
-		<?php get_template_part( 'template-parts/template-archive', get_post_type() ); ?>
+		<?php get_template_part( 'template-parts/site-header', get_post_type() ); ?>
+		<?php get_template_part( 'template-parts/template-404', get_post_type() ); ?>
 		<?php get_template_part( 'template-site/site-footer', get_post_type() ); ?>
 		<!-- SITE CONTAINER:END -->
 	</div>
