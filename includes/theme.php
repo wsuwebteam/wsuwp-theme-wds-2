@@ -29,6 +29,7 @@ class Theme {
         require_once __DIR__ . '/customizer.php';
         require_once __DIR__ . '/menus.php';
 		require_once __DIR__ . '/supports.php';
+		require_once __DIR__ . '/sidebars.php';
 		require_once __DIR__ . '/wds_options.php';
 
 	}
