@@ -70,6 +70,14 @@ class Customizer_Social {
 			)
 		);
 
+		$wp_customize->add_setting(
+			'wsu_wds_theme_beta',
+			array(
+				'capability' => 'edit_theme_options',
+				'default'    => false,
+			)
+		);
+
 		$wp_customize->add_control( 
 			'wsu_wds_social_twitter_control',
 			array(
@@ -107,6 +115,16 @@ class Customizer_Social {
 				'section'  => $this->section_id,
 				'settings' => 'wsu_wds[social][instagram]',
 				'type'     => 'text',
+			)
+		);
+
+		$wp_customize->add_control(
+			'wsu_wds_theme_beta_control',
+			array(
+				'settings'    => 'wsu_wds_theme_beta',
+				'type'        => 'checkbox',
+				'section'     => $this->section_id,
+				'label'       => __( 'Beta Mode' ),
 			)
 		);
 
