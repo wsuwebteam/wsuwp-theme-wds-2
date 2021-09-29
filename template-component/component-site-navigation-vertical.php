@@ -1,3 +1,4 @@
+<?php if ( 'vertical' === get_theme_mod( 'wsu_wds_site_navigation_style', 'vertical' ) ) : ?>
 <div class="wsu-navigation-site" aria-expanded="true" aria-haspopup="true">
 	<div class="wsu-navigation-site__overlay wsu-navigation-site--close">
 	</div>
@@ -23,3 +24,4 @@
 		<button class="wsu-button-ui-close wsu-navigation-site--close">Close</button>
 	</div>
 </div>
+<?php endif; ?>

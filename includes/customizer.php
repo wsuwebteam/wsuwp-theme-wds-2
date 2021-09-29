@@ -12,6 +12,8 @@ class Customizer {
 		require_once get_template_directory() . '/customizer/customizer_global_footer.php';
 		require_once get_template_directory() . '/customizer/customizer_site_header.php';
 		require_once get_template_directory() . '/customizer/customizer_site_footer.php';
+		require_once get_template_directory() . '/customizer/customizer_site_navigation.php';
+		require_once get_template_directory() . '/customizer/customizer_template.php';
 
 		add_action( 'customize_register', array( __CLASS__, 'setup_customizer' ) );
 
@@ -20,6 +22,8 @@ class Customizer {
 	public static function setup_customizer( $wp_customize ) {
 
 		self::setup_theme_customizer( $wp_customize );
+
+		self::setup_template_customizer( $wp_customize );
 
 	}
 
@@ -46,6 +50,26 @@ class Customizer {
 		$customizers[] = new Customizer_Global_Footer( $wp_customize, $panel );
 		$customizers[] = new Customizer_Site_Header( $wp_customize, $panel );
 		$customizers[] = new Customizer_Site_Footer( $wp_customize, $panel );
+		$customizers[] = new Customizer_Site_Navigation( $wp_customize, $panel );
+
+	}
+
+	public static function setup_template_customizer( $wp_customize ) {
+
+		$customizers = array();
+
+		$panel = 'wds_template_panel';
+
+		$wp_customize->add_panel(
+			$panel,
+			array(
+				'title' => __( 'WDS Template Options' ),
+				'description' => 'Settings for WSU Web Design System Theme', // Include html tags such as <p>.
+				'priority' => 160, // Mixed with top-level-section hierarchy.
+			)
+		);
+
+		$customizers[] = new Customizer_Template( $wp_customize, $panel );
 
 	}
 
