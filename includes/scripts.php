@@ -24,7 +24,7 @@ class Scripts {
 	public static function enqueue_scripts() {
 
 		$theme_version = Theme::get( 'version' );
-		$wds_version   = ( ! empty( get_theme_mod( 'wsu_wds_theme_beta' ) ) ) ? '2.beta' : '2.x';
+		$wds_version   = ( ! empty( get_theme_mod( 'wsu_wds_theme_version' ) ) ) ? get_theme_mod( 'wsu_wds_theme_version' ) : '2.x';
 		$is_local      = ( defined( 'WDS_LOCALHOST_URL' ) ) ? true : false;
 
 		$wsu_design_system_normalize          = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css';
