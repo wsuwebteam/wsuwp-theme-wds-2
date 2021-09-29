@@ -78,6 +78,14 @@ class Customizer_Social {
 			)
 		);
 
+		$wp_customize->add_setting(
+			'wsu_wds_theme_version',
+			array(
+				'capability' => 'edit_theme_options',
+				'default'    => '',
+			)
+		);
+
 		$wp_customize->add_control( 
 			'wsu_wds_social_twitter_control',
 			array(
@@ -125,6 +133,16 @@ class Customizer_Social {
 				'type'        => 'checkbox',
 				'section'     => $this->section_id,
 				'label'       => __( 'Beta Mode' ),
+			)
+		);
+
+		$wp_customize->add_control( 
+			'wsu_wds_theme_version_control',
+			array(
+				'label'    => 'CSS Version',
+				'section'  => $this->section_id,
+				'settings' => 'wsu_wds_theme_version',
+				'type'     => 'text',
 			)
 		);
 
