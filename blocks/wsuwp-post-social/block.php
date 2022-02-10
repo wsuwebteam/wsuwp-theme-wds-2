@@ -47,23 +47,19 @@ class Block_WSUWP_Post_Social extends Block {
 
 		if ( 'post' === $attrs['setFrom'] ) {
 
-			if ( in_the_loop() ) {
+			//$attrs['link'] = ( empty( $attrs['link'] ) ) ? urlencode( get_permalink() ) : $attrs['link'];
 
-				//$attrs['link'] = ( empty( $attrs['link'] ) ) ? urlencode( get_permalink() ) : $attrs['link'];
-	
-				//$attrs['title'] = ( empty( $attrs['link'] ) ) ? urlencode( get_the_title() ) : $attrs['title'];
-	
-				$attrs['link'] = ( empty( $attrs['link'] ) ) ? get_permalink() : $attrs['link'];
-	
-				$attrs['title'] = ( empty( $attrs['title'] ) ) ? get_the_title() : $attrs['title'];
+			//$attrs['title'] = ( empty( $attrs['link'] ) ) ? urlencode( get_the_title() ) : $attrs['title'];
 
-				$attrs['twitter']   = $attrs['link'];
-				$attrs['facebook']  = $attrs['link'];
-				$attrs['linkedin']  = $attrs['link'];
-				$attrs['instagram'] = $attrs['link'];
-				$attrs['email']     = $attrs['link'];
-	
-			}
+			$attrs['link'] = ( empty( $attrs['link'] ) ) ? get_permalink() : $attrs['link'];
+
+			$attrs['title'] = ( empty( $attrs['title'] ) ) ? get_the_title() : $attrs['title'];
+
+			$attrs['twitter']   = $attrs['link'];
+			$attrs['facebook']  = $attrs['link'];
+			$attrs['linkedin']  = $attrs['link'];
+			$attrs['instagram'] = $attrs['link'];
+			$attrs['email']     = $attrs['link'];
 
 		} elseif ( 'options' === $attrs['setFrom'] ) {
 
